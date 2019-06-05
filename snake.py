@@ -4,6 +4,11 @@ import random
 
 pygame.init()
 
+def print(*a, **b):
+    import builtins, sys
+    builtins.print(*a, **b)
+    sys.stdout.flush()
+
 #setup
 taille = [700, 500]
 ecran = pygame.display.set_mode(taille)
@@ -14,57 +19,102 @@ bleu = [0,0,204]
 
 
 # fruit : position
-x = random.randrange(700)
-y = random.randrange(500)
 
 
-ma_position = 10
-ma_position2 = 20
-direction = 0
+class Snake:
+    pass
+
+class Food:
+    pass
+
+snake = Snake()  # Snake snake = new Snake();
+snake.ma_position = 10
+snake.ma_position2 = 20
+snake.direction = 0
+score = 0
+food = Food()
+food.x = random.randrange(700)
+food.y = random.randrange(500)
+
+liste_de_pommes_wesh = []
+liste_de_pommes_wesh.append(food)
+
+for i in range(5):
+    food2 = Food()
+    food2.x = random.randrange(700)
+    food2.y = random.randrange(500)
+    liste_de_pommes_wesh.append(food2)
+
+
+font = pygame.font.SysFont('Calibri', 25)
+
+s = 1
 
 fini = 0
 while fini == 0:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             fini = 1
-
-
-        if ma_position > 600:
-            fini = 1
-        if ma_position2 > 500:
-            fini = 1
-       
-
-        #good work but need more work
-        if (ma_position == x or ma_position == x + 7 or ma_position == x - 7 and ma_position2 == y or ma_position2 == y + 7 or ma_position2 == y - 7):
-            x = random.randrange(700)
-            y = random.randrange(500)
-
         if event.type == pygame.KEYDOWN:
             if event.key == 276:
-                direction = 2
+                snake.direction = 2
             elif event.key == 275:
-                direction = 1
+                snake.direction = 1
             elif event.key == 273:
-                direction = 4
+                snake.direction = 4
             elif event.key == 274:
-                direction = 3
-
+                snake.direction = 3  
 
 
     # tick
-    if direction == 1:
-        ma_position = ma_position + 3
-    elif direction== 2:
-        ma_position = ma_position - 3
-    elif direction == 3:
-        ma_position2 = ma_position2 + 3
-    elif direction == 4:
-        ma_position2 = ma_position2 - 3
-    # dessin
+    if snake.direction == 1:
+        snake.ma_position = snake.ma_position + 3
+    elif snake.direction== 2:
+        snake.ma_position = snake.ma_position - 3
+    elif snake.direction == 3:
+        snake.ma_position2 = snake.ma_position2 + 3
+    elif snake.direction == 4:
+        snake.ma_position2 = snake.ma_position2 - 3    
+
+
+    if snake.ma_position > 700:
+        fini = 1
+    if snake.ma_position < 0:
+        fini = 1        
+    if snake.ma_position2 > 500:
+        fini = 1
+    if snake.ma_position2 < 0:
+        fini = 1    
+
+    #colisionq
+    for f in liste_de_pommes_wesh:
+        if snake.ma_position + 25 < f.x:
+            touch = False
+        elif snake.ma_position > f.x + 25:
+            touch = False        
+        elif snake.ma_position2 + 25 < f.y:
+            touch = False
+        elif snake.ma_position2 > f.y + 25:
+            touch = False
+        else:
+            touch = True
+        
+        if touch == True:
+            f.x = random.randrange(700)
+            f.y = random.randrange(500)
+            score = score + 1
+            print("your score is", score)
+
+
+    
+    # dessin !
+    image_score = font.render("Score: " + str(score), True, bleu)
+    
     ecran.fill(blanc)
-    pygame.draw.rect(ecran, rouge, [ma_position, ma_position2 , 25, 25])
-    pygame.draw.rect(ecran, bleu, [x, y, 25, 25])
+    pygame.draw.rect(ecran, rouge, [snake.ma_position, snake.ma_position2 , 25, 25])
+    for f in liste_de_pommes_wesh:
+        pygame.draw.rect(ecran, bleu, [f.x, f.y, 25, 25])
+    ecran.blit(image_score, [20,20])
     pygame.display.flip()
 
     clock.tick(60)
