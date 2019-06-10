@@ -22,6 +22,29 @@ bleu = [0,0,204]
 
 
 class Snake:
+ import pygame
+import random
+
+pygame.init()
+
+def print(*a, **b):
+    import builtins, sys
+    builtins.print(*a, **b)
+    sys.stdout.flush()
+
+#setup
+taille = [700, 500]
+ecran = pygame.display.set_mode(taille)
+clock = pygame.time.Clock()
+rouge = [255,0,0]
+blanc = [255,255,255]
+bleu = [0,0,204]
+
+
+# fruit : position
+
+
+class Snake:
     pass
 
 class Food:
@@ -36,10 +59,11 @@ food = Food()
 food.x = random.randrange(700)
 food.y = random.randrange(500)
 
+
 liste_de_pommes_wesh = []
 liste_de_pommes_wesh.append(food)
 
-for i in range(5):
+for i in range(2):
     food2 = Food()
     food2.x = random.randrange(700)
     food2.y = random.randrange(500)
@@ -79,12 +103,20 @@ while fini == 0:
 
     if snake.ma_position > 700:
         fini = 1
+        print("you lost")
+        print("your score is", score)
     if snake.ma_position < 0:
-        fini = 1        
+        fini = 1
+        print("you lost")
+        print("your score is", score)        
     if snake.ma_position2 > 500:
         fini = 1
+        print("you lost")
+        print("your score is", score)
     if snake.ma_position2 < 0:
-        fini = 1    
+        fini = 1
+        print("you lost")
+        print("your score is", score)  
 
     #colisionq
     for f in liste_de_pommes_wesh:
@@ -103,7 +135,7 @@ while fini == 0:
             f.x = random.randrange(700)
             f.y = random.randrange(500)
             score = score + 1
-            print("your score is", score)
+            
 
 
     
