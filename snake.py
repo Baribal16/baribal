@@ -1,4 +1,4 @@
-#snake:
+#my snake
 import pygame
 import random
 
