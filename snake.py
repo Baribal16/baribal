@@ -18,7 +18,7 @@ blanc = [255,255,255]
 bleu = [0,0,204]
 
 
-# fruit : position
+
 
 
 class Snake:
@@ -74,7 +74,7 @@ list_snake = []
 list_snake.append(snake)
 
 
-for f in range(5):   #f = 0 1, 2, 3, 4
+for f in range(1):   #f = 0 1, 2, 3, 4
     snake2 = Snake()
     snake2.ma_position = 25 * f   # = 0, 25, 50, 75, 100
     snake2.ma_position2 = 25
@@ -93,15 +93,16 @@ while fini == 0:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             fini = 1
-        if event.type == pygame.KEYDOWN:
-            if event.key == 276:
-                snake.direction = 2
-            elif event.key == 275:
-                snake.direction = 1
-            elif event.key == 273:
-                snake.direction = 4
-            elif event.key == 274:
-                snake.direction = 3  
+        for serpent in list_snake:
+            if event.type == pygame.KEYDOWN:
+                if event.key == 276:
+                    serpent.direction = 2
+                elif event.key == 275:
+                    serpent.direction = 1
+                elif event.key == 273:
+                    serpent.direction = 4
+                elif event.key == 274:
+                    serpent.direction = 3  
 
 
     # tick
@@ -165,7 +166,7 @@ while fini == 0:
     ecran.blit(image_score, [20,20])
     pygame.display.flip()
 
-    clock.tick(60)
+    clock.tick(15)
 
 
 
