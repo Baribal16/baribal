@@ -1,4 +1,4 @@
-#snake:
+#my snake
 import pygame
 import random
 
@@ -22,7 +22,8 @@ bleu = [0,0,204]
 
 
 class Snake:
- import pygame
+    pass
+import pygame
 import random
 
 pygame.init()
@@ -51,8 +52,8 @@ class Food:
     pass
 
 snake = Snake()  # Snake snake = new Snake();
-snake.ma_position = 10
-snake.ma_position2 = 20
+snake.ma_position = 0
+snake.ma_position2 = 0
 snake.direction = 0
 score = 0
 food = Food()
@@ -69,6 +70,19 @@ for i in range(2):
     food2.y = random.randrange(500)
     liste_de_pommes_wesh.append(food2)
 
+list_snake = []
+list_snake.append(snake)
+
+
+for f in range(5):   #f = 0 1, 2, 3, 4
+    snake2 = Snake()
+    snake2.ma_position = 25 * f   # = 0, 25, 50, 75, 100
+    snake2.ma_position2 = 25
+    list_snake.append(snake2)
+    snake2.direction = 1
+    print(len(list_snake))
+    
+# [(x=0, y=0, d=1), (x=0, y=, d=), (x=25, y=, d=), (x=50, y=, d=)]
 
 font = pygame.font.SysFont('Calibri', 25)
 
@@ -91,16 +105,17 @@ while fini == 0:
 
 
     # tick
-    if snake.direction == 1:
-        snake.ma_position = snake.ma_position + 3
-    elif snake.direction== 2:
-        snake.ma_position = snake.ma_position - 3
-    elif snake.direction == 3:
-        snake.ma_position2 = snake.ma_position2 + 3
-    elif snake.direction == 4:
-        snake.ma_position2 = snake.ma_position2 - 3    
+    for serpent in list_snake:
+        if serpent.direction == 1:
+            serpent.ma_position = snake.ma_position + 3
+        elif serpent.direction== 2:
+            serpent.ma_position = snake.ma_position - 3
+        elif serpent.direction == 3:
+            serpent.ma_position2 = snake.ma_position2 + 3
+        elif serpent.direction == 4:
+            serpent.ma_position2 = snake.ma_position2 - 3    
 
-
+# jeux perdu
     if snake.ma_position > 700:
         fini = 1
         print("you lost")
@@ -118,7 +133,7 @@ while fini == 0:
         print("you lost")
         print("your score is", score)  
 
-    #colisionq
+    #colisions
     for f in liste_de_pommes_wesh:
         if snake.ma_position + 25 < f.x:
             touch = False
@@ -137,13 +152,14 @@ while fini == 0:
             score = score + 1
             
 
-
-    
     # dessin !
     image_score = font.render("Score: " + str(score), True, bleu)
     
+
     ecran.fill(blanc)
-    pygame.draw.rect(ecran, rouge, [snake.ma_position, snake.ma_position2 , 25, 25])
+    for serpent in list_snake:
+        pygame.draw.rect(ecran, rouge, [serpent.ma_position,
+                                        serpent.ma_position2, 25, 25])
     for f in liste_de_pommes_wesh:
         pygame.draw.rect(ecran, bleu, [f.x, f.y, 25, 25])
     ecran.blit(image_score, [20,20])
