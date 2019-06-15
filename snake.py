@@ -12,34 +12,13 @@ def print(*a, **b):
 
 #setup
 taille = [700, 500]
-ecran = pygame.display.set_mode(taille)
+screen = pygame.display.set_mode(taille)
 clock = pygame.time.Clock()
-rouge = [255,0,0]
-blanc = [255,255,255]
-bleu = [0,0,204]
+red = [255,0,0]
+white = [255,255,255]
+blue = [0,0,204]
 
 
-
-
-
-class Snake:
-    pass
-import pygame
-import random
-
-pygame.init()
-
-
-#setup
-taille = [700, 500]
-ecran = pygame.display.set_mode(taille)
-clock = pygame.time.Clock()
-rouge = [255,0,0]
-blanc = [255,255,255]
-bleu = [0,0,204]
-
-
-# fruit : position
 
 
 class Snake:
@@ -58,14 +37,14 @@ food.x = random.randrange(700)
 food.y = random.randrange(500)
 
 
-liste_de_pommes_wesh = []
-liste_de_pommes_wesh.append(food)
+apple_list = []
+apple_list.append(food)
 
 for i in range(2):
     food2 = Food()
     food2.x = random.randrange(700)
     food2.y = random.randrange(500)
-    liste_de_pommes_wesh.append(food2)
+    apple_list.append(food2)
 
 list_snake = []
 list_snake.append(snake)
@@ -79,13 +58,13 @@ for f in range(1):   #f = 0 1, 2, 3, 4
     snake2.direction = 1
     print(len(list_snake))
     
-# [(x=0, y=0, d=1), (x=0, y=, d=), (x=25, y=, d=), (x=50, y=, d=)]
+
 
 font = pygame.font.SysFont('Calibri', 25)
 
 s = 1
 
- #set up pour jeux perdu
+ #set up lost game
 fini = 0
 while fini == 0:
     for event in pygame.event.get():
@@ -93,7 +72,7 @@ while fini == 0:
             fini = 1
 
 
-       #changement de direction avec les touche
+       #change direction if key is presst
 
         for serpent in list_snake:
             if event.type == pygame.KEYDOWN:
@@ -105,10 +84,10 @@ while fini == 0:
                     serpent.direction = 4
                 elif event.key == 274:
                     serpent.direction = 3  
-
+                
 
  # tick
-    # faire bouger le snake
+    # make the snake move
     for serpent in list_snake:
         if serpent.direction == 1:
             serpent.ma_position = snake.ma_position + 3
@@ -120,7 +99,7 @@ while fini == 0:
             serpent.ma_position2 = snake.ma_position2 - 3    
 
 
-# jeux perdu
+# game lost
     if snake.ma_position > 700:
         fini = 1
         print("you lost")
@@ -140,7 +119,7 @@ while fini == 0:
 
    
     #colisions
-    for f in liste_de_pommes_wesh:
+    for f in apple_list:
         if snake.ma_position + 25 < f.x:
             touch = False
         elif snake.ma_position > f.x + 25:
@@ -158,25 +137,25 @@ while fini == 0:
             score = score + 1
                 
 
- # dessin !
+ # draw !
     
 
     #score set up
-    image_score = font.render("Score: " + str(score), True, bleu)
+    image_score = font.render("Score: " + str(score), True, blue)
     
 
-    ecran.fill(blanc)
+    screen.fill(white)
     
-    #snake dessin
+    #snake draw
     for serpent in list_snake:
-        pygame.draw.rect(ecran, rouge, [serpent.ma_position,
+        pygame.draw.rect(screen, red, [serpent.ma_position,
                                         serpent.ma_position2, 25, 25])
-    #food dessin
-    for f in liste_de_pommes_wesh:
-        pygame.draw.rect(ecran, bleu, [f.x, f.y, 25, 25])
+    #food draw
+    for f in apple_list:
+        pygame.draw.rect(screen, blue, [f.x, f.y, 25, 25])
    
-    #score dessin
-   ecran.blit(image_score, [20,20])
+    #score draw
+    screen.blit(image_score, [20,20])
     pygame.display.flip()
 
     clock.tick(60)
