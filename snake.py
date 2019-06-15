@@ -1,9 +1,10 @@
-#my snake
+#snake :
 import pygame
 import random
 
 pygame.init()
 
+#for wing consol
 def print(*a, **b):
     import builtins, sys
     builtins.print(*a, **b)
@@ -28,10 +29,6 @@ import random
 
 pygame.init()
 
-def print(*a, **b):
-    import builtins, sys
-    builtins.print(*a, **b)
-    sys.stdout.flush()
 
 #setup
 taille = [700, 500]
@@ -76,7 +73,7 @@ list_snake.append(snake)
 
 for f in range(1):   #f = 0 1, 2, 3, 4
     snake2 = Snake()
-    snake2.ma_position = 25 * f   # = 0, 25, 50, 75, 100
+    snake2.ma_position = f * 25   # = 0, 25, 50, 75, 100
     snake2.ma_position2 = 25
     list_snake.append(snake2)
     snake2.direction = 1
@@ -88,11 +85,16 @@ font = pygame.font.SysFont('Calibri', 25)
 
 s = 1
 
+ #set up pour jeux perdu
 fini = 0
 while fini == 0:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             fini = 1
+
+
+       #changement de direction avec les touche
+
         for serpent in list_snake:
             if event.type == pygame.KEYDOWN:
                 if event.key == 276:
@@ -105,7 +107,8 @@ while fini == 0:
                     serpent.direction = 3  
 
 
-    # tick
+ # tick
+    # faire bouger le snake
     for serpent in list_snake:
         if serpent.direction == 1:
             serpent.ma_position = snake.ma_position + 3
@@ -115,6 +118,7 @@ while fini == 0:
             serpent.ma_position2 = snake.ma_position2 + 3
         elif serpent.direction == 4:
             serpent.ma_position2 = snake.ma_position2 - 3    
+
 
 # jeux perdu
     if snake.ma_position > 700:
@@ -134,6 +138,7 @@ while fini == 0:
         print("you lost")
         print("your score is", score)  
 
+   
     #colisions
     for f in liste_de_pommes_wesh:
         if snake.ma_position + 25 < f.x:
@@ -151,23 +156,30 @@ while fini == 0:
             f.x = random.randrange(700)
             f.y = random.randrange(500)
             score = score + 1
-            
+                
 
-    # dessin !
+ # dessin !
+    
+
+    #score set up
     image_score = font.render("Score: " + str(score), True, bleu)
     
 
     ecran.fill(blanc)
+    
+    #snake dessin
     for serpent in list_snake:
         pygame.draw.rect(ecran, rouge, [serpent.ma_position,
                                         serpent.ma_position2, 25, 25])
+    #food dessin
     for f in liste_de_pommes_wesh:
         pygame.draw.rect(ecran, bleu, [f.x, f.y, 25, 25])
-    ecran.blit(image_score, [20,20])
+   
+    #score dessin
+   ecran.blit(image_score, [20,20])
     pygame.display.flip()
 
-    clock.tick(15)
-
+    clock.tick(60)
 
 
 pygame.quit()
