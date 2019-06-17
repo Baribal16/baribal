@@ -42,8 +42,8 @@ apple_list.append(food)
 
 for i in range(2):
     food2 = Food()
-    food2.x = random.randrange(700)
-    food2.y = random.randrange(500)
+    food2.x = random.randrange(675)
+    food2.y = random.randrange(475)
     apple_list.append(food2)
 
 list_snake = []
@@ -55,7 +55,7 @@ for f in range(1):   #f = 0 1, 2, 3, 4
     snake2.ma_position = f * 25   # = 0, 25, 50, 75, 100
     snake2.ma_position2 = 25
     list_snake.append(snake2)
-    snake2.direction = 1
+    snake2.direction = 0
     print(len(list_snake))
     
 
