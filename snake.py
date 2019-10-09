@@ -52,11 +52,13 @@ list_snake.append(snake)
 
 for f in range(1):  # f = 0 1, 2, 3, 4
     snake2 = Snake()
-    snake2.ma_position = f * 25  # = 0, 25, 50, 75, 100
-    snake2.ma_position2 = 25
+    snake2.ma_position = 25
+    snake2.ma_position2 = f * 25 # = 0, 25, 50, 75, 100
     list_snake.append(snake2)
     snake2.direction = 0
-    print(len(list_snake))
+
+print("len", len(list_snake))
+print("comm", snake.ma_position, snake.ma_position2, list_snake[1].ma_position, list_snake[1].ma_position)
 
 font = pygame.font.SysFont('Calibri', 25)
 
@@ -89,13 +91,16 @@ while fini == 0:
     if compteur == 10:
         compteur = 0
 
-        i = len(list_snake) - 1
-        while i > 0:
-            list_snake[i].ma_position = list_snake[i-1].ma_position
-            list_snake[i].ma_position2 = list_snake[i-1].ma_position2
-            i = i - 1
+        print("avant", snake.ma_position, snake.ma_position2, list_snake[1].ma_position, list_snake[1].ma_position)
+        if snake.direction != 0:
+            i = len(list_snake) - 1
+            while i > 0:
+                list_snake[i].ma_position = list_snake[i-1].ma_position
+                list_snake[i].ma_position2 = list_snake[i-1].ma_position2
+                i = i - 1
 
-
+        print("d", snake.direction)
+        print("apres", snake.ma_position, snake.ma_position2, list_snake[1].ma_position, list_snake[1].ma_position)
         if snake.direction == 1:
             snake.ma_position = snake.ma_position + 25
         elif snake.direction == 2:
@@ -104,6 +109,7 @@ while fini == 0:
             snake.ma_position2 = snake.ma_position2 + 25
         elif snake.direction == 4:
             snake.ma_position2 = snake.ma_position2 - 25
+        print(snake.ma_position, snake.ma_position2, list_snake[1].ma_position, list_snake[1].ma_position)
 
         # game lost
     if snake.ma_position > 700:
@@ -123,6 +129,13 @@ while fini == 0:
         print("you lost")
         print("your score is", score)
 
+    for serpent in list_snake[1:]:
+        if snake.ma_position == serpent.ma_position and snake.ma_position2 == serpent.ma_position2:
+            fini = 1
+            print("you losty")
+            print("your score is", score)
+
+
         # colisions
     for f in apple_list:
         if snake.ma_position + 25 < f.x:
@@ -137,6 +150,7 @@ while fini == 0:
             touch = True
 
         if touch == True:
+            print("touch")
             snake3 = Snake()
             snake3.ma_position = list_snake[len(list_snake) - 1].ma_position
             snake3.ma_position2 = list_snake[len(list_snake) - 1].ma_position2
@@ -168,3 +182,7 @@ while fini == 0:
     clock.tick(60)
 
 pygame.quit()
+
+
+
+
