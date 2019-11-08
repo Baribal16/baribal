@@ -9,28 +9,43 @@ game = False
 while game == False:
     joueur =  input("pierre, papier, ciseaux?")
 
+
+
     if joueur == ordi:
-        print("égalité")
+        print("tie the computer did", ordi)
+        ordi = a[randint(0,2)]
+    elif joueur == "X-ray":
+            print(ordi)
 
     elif joueur == "pierre":
         if ordi == "papier":
-            print("tas perdu")
+            print("you lost ):, the computer did", ordi)
+            ordi = a[randint(0,2)]
+
         else:
-            print("ta gagné")
+            print("you won! the computer did", ordi)
+            ordi = a[randint(0,2)]
+
 
     elif joueur == "papier":
         if ordi == "ciseaux":
-          print("t'as perdu, contre un bot, sal merde")
+          print("you lost ): the computer did", ordi)
+          ordi = a[randint(0,2)]
+
         else:
-            print("tu là fé, t'as batues 1 bot, bravaux!")
+            print("you won! the computer did", ordi)
+            ordi = a[randint(0,2)]
+
 
     elif joueur == "ciseaux":
         if ordi == "pierre":
-            print("t'as perdu, contre un bot, sal mer2")
+            print("you lost ): the computer did", ordi)
+            ordi = a[randint(0,2)]
+
         else:
-            print("tu l'a fait, ta batues 1 bot, bravo!")
+            print("you won! the computer did", ordi)
+            ordi = a[randint(0,2)]
+
     else:
-        print("tu cés po écrir gros")
-
-
+        print("incorect imput")
 
