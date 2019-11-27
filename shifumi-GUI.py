@@ -4,7 +4,7 @@ a = ["pierre", "papier", "ciseaux" ]
 #set play for computer
 ordi = a[randint(0,2)]
 
-import pygame
+import pygame, sys
 
 pygame.init()
 
@@ -27,10 +27,7 @@ image_pierre_petite = pygame.transform.smoothscale(image_pierre, [200,200])
 image_ciseaux_petite = pygame.transform.smoothscale(image_ciseaux, [200,200])
 image_papier_petite = pygame.transform.smoothscale(image_papier, [200,200])
 
-
-print("Taille pierre :", image_pierre.get_width(), image_pierre.get_height())
-print("Taille ciceau:", image_ciseaux.get_width(), image_ciseaux.get_height())
-print("Taille papier :", image_papier.get_width(), image_papier.get_height())
+player = ""
 
 clock = pygame.time.Clock()
 
@@ -40,18 +37,40 @@ while fini == 0:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             fini = 1
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            print("hello", event.pos[0], event.pos[1])
+
+            mouseposition = event.pos
+            if mouseposition[0] >= 175 and mouseposition[0] <= 375 and mouseposition[1] >= 500 and mouseposition[1] <= 700:
+                player = "pierre"
+                print("pierre")
+
+            if mouseposition[0] >= 400 and mouseposition[0] <= 600 and mouseposition[1] >= 500 and mouseposition[1] <= 700:
+                player = "ciseaux"
+                print("ciseaux")
+
+            if mouseposition[0] >= 625 and mouseposition[0] <= 825 and mouseposition[1] >= 500 and mouseposition[1] <= 700:
+                player = "papier"
+                print("papier")
+
+            if player != "":
+                ...
+
+
 
     # TICK
 
     # DESSIN
     ecran.fill(BLANC)
 
-    ecran.blit(image_papier_petite, [600, 200])
-    ecran.blit(image_ciseaux_petite, [400, 200])
-    ecran.blit(image_pierre_petite, [200, 200])
+    ecran.blit(image_papier_petite, [625, 500])
+    ecran.blit(image_ciseaux_petite, [400, 500])
+    ecran.blit(image_pierre_petite, [175, 500])
 
     pygame.display.flip()
+    #sys.stdout.flush()
 
     clock.tick(60)
 
 pygame.quit()
+
