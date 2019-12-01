@@ -35,16 +35,16 @@ snake.ma_position2 = 0
 snake.direction = 0
 score = 0
 food = Food()
-food.x = random.randrange(700)
-food.y = random.randrange(500)
+food.x = random.randrange(650)
+food.y = random.randrange(450)
 
 apple_list = []
 apple_list.append(food)
 
 for i in range(2):
     food2 = Food()
-    food2.x = random.randrange(675)
-    food2.y = random.randrange(475)
+    food2.x = random.randrange(650)
+    food2.y = random.randrange(450)
     apple_list.append(food2)
 
 list_snake = []
@@ -91,7 +91,7 @@ while fini == 0:
     if compteur == 10:
         compteur = 0
 
-        print("avant", snake.ma_position, snake.ma_position2, list_snake[1].ma_position, list_snake[1].ma_position)
+        #print("avant", snake.ma_position, snake.ma_position2, list_snake[1].ma_position, list_snake[1].ma_position)
         if snake.direction != 0:
             i = len(list_snake) - 1
             while i > 0:
@@ -99,8 +99,8 @@ while fini == 0:
                 list_snake[i].ma_position2 = list_snake[i-1].ma_position2
                 i = i - 1
 
-        print("d", snake.direction)
-        print("apres", snake.ma_position, snake.ma_position2, list_snake[1].ma_position, list_snake[1].ma_position)
+        #print("d", snake.direction)
+        #print("apres", snake.ma_position, snake.ma_position2, list_snake[1].ma_position, list_snake[1].ma_position)
         if snake.direction == 1:
             snake.ma_position = snake.ma_position + 25
         elif snake.direction == 2:
@@ -109,7 +109,7 @@ while fini == 0:
             snake.ma_position2 = snake.ma_position2 + 25
         elif snake.direction == 4:
             snake.ma_position2 = snake.ma_position2 - 25
-        print(snake.ma_position, snake.ma_position2, list_snake[1].ma_position, list_snake[1].ma_position)
+        #print(snake.ma_position, snake.ma_position2, list_snake[1].ma_position, list_snake[1].ma_position)
 
         # game lost
     if snake.ma_position > 700:
@@ -150,13 +150,13 @@ while fini == 0:
             touch = True
 
         if touch == True:
-            print("touch")
+            #print("touch")
             snake3 = Snake()
             snake3.ma_position = list_snake[len(list_snake) - 1].ma_position
             snake3.ma_position2 = list_snake[len(list_snake) - 1].ma_position2
 
-            f.x = random.randrange(700)
-            f.y = random.randrange(500)
+            f.x = random.randrange(670)
+            f.y = random.randrange(470)
             score = score + 1
             list_snake.append(snake3)
 
@@ -182,7 +182,3 @@ while fini == 0:
     clock.tick(60)
 
 pygame.quit()
-
-
-
-
