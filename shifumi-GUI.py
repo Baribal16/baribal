@@ -6,6 +6,7 @@ ordi = a[randint(0,2)]
 
 import pygame, sys
 
+
 pygame.init()
 
 taille = [1000, 800]
@@ -28,7 +29,6 @@ image_ciseaux_petite = pygame.transform.smoothscale(image_ciseaux, [200,200])
 image_papier_petite = pygame.transform.smoothscale(image_papier, [200,200])
 
 player = ""
-
 clock = pygame.time.Clock()
 
 fini = 0
@@ -54,7 +54,29 @@ while fini == 0:
                 print("papier")
 
             if player != "":
-                ...
+                print("ordi", ordi)
+
+                if player == ordi:
+                    print("tie")
+
+                elif player  == "pierre":
+                    if ordi == "papier":
+                        print("you lost")
+                    else:
+                        print ("you won")
+
+                elif player == "papier":
+                    if ordi == "ciseaux":
+                        print("you lost")
+                    else:
+                        print("you won")
+
+                elif player == "ciseaux":
+                    if ordi == "pierre":
+                        print("you lost")
+                    else:
+                        print("you won")
+
 
 
 
@@ -73,4 +95,3 @@ while fini == 0:
     clock.tick(60)
 
 pygame.quit()
-
