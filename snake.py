@@ -58,7 +58,7 @@ for f in range(1):  # f = 0 1, 2, 3, 4
     snake2.direction = 0
 
 print("len", len(list_snake))
-print("comm", snake.ma_position, snake.ma_position2, list_snake[1].ma_position, list_snake[1].ma_position)
+print("comm", snake.ma_position, snake.ma_position2,list_snake[1].ma_position, list_snake[1].ma_position)
 
 font = pygame.font.SysFont('Calibri', 25)
 
@@ -75,14 +75,16 @@ while fini == 0:
         # change direction if key is presst
 
         if event.type == pygame.KEYDOWN:
-            if event.key == 276:
+            #print(event.key)
+            if event.key == 113:
                 snake.direction = 2
-            elif event.key == 275:
+            elif event.key == 100:
                 snake.direction = 1
-            elif event.key == 273:
+            elif event.key == 122:
                 snake.direction = 4
-            elif event.key == 274:
+            elif event.key == 115:
                 snake.direction = 3
+
 
                     # tick
     # make the snake move
@@ -132,11 +134,12 @@ while fini == 0:
     for serpent in list_snake[1:]:
         if snake.ma_position == serpent.ma_position and snake.ma_position2 == serpent.ma_position2:
             fini = 1
-            print("you losty")
+            print("you lost")
             print("your score is", score)
 
 
         # colisions
+
     for f in apple_list:
         if snake.ma_position + 25 < f.x:
             touch = False
