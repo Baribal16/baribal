@@ -2,11 +2,11 @@
 snake game pygames
 README
 
-working on a school projekt!
+working on a school project!
 
 this is my first ever game!
 
-i'm am coding it in python with the pygames librery
+i'm am coding it in python with the pygames library
 
-hop it turn out good.
+hope it turn out good.
 
